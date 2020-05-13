@@ -1,0 +1,89 @@
+<html>
+  {{template "header.tmpl.html"}}
+  <body>
+    <div class="container">
+      <div class="jumbotron vertical-center">
+        <h1>Board Meetings Details</h1>
+        <form>
+          <div class="form-group">
+            <label for="stocks">Stock</label>
+            <input type="text" class="form-control" id="stocks" />
+          </div>
+          <button
+            type="submit"
+            id="getdetails"
+            class="btn btn-primary btn-lg btn-block"
+          >
+            Submit
+          </button>
+        </form>
+      </div>
+
+      <div id="progressbar"></div>
+      <h1 id="nodata" style="display: none;">No Data Found</h1>
+      <table
+        id="boardtable"
+        style="display: none;"
+        class="table table-bordered table-striped"
+      >
+        <tbody></tbody>
+      </table>
+    </div>
+
+    <script>
+      $("#getdetails").click(function (e) {
+        e.preventDefault();
+
+        $("#progressbar").progressbar({
+          value: false,
+        });
+
+        console.log(window.location.href);
+        console.log($("#stocks").val());
+
+        $.ajax({
+          url: window.location.href + "getBoardMeetings",
+          type: "POST",
+          datatype: "json",
+          contentType: "application/json",
+          data: JSON.stringify({ symbol: $("#stocks").val() }),
+          success: function (msg, status, jqXHR) {
+            if (msg.result.length > 0) {
+              $("#nodata").hide();
+              $("#boardtable tr").remove();
+              var string = "";
+              var tableHeaders = ["Board Meeting Date", "Purpose", "Details"];
+              var dataKeys = ["BoardMeetingDate", "Purpose", "Details"];
+              
+              string += '<thead><tr>';
+              string += '<th scope="col"></th>'
+              for (var k = 0; k < msg.result.length; k++) {
+                string += '<th scope="col">' + "Meeting " + String(k + 1) + '</th>'
+              }
+              string += '</tr></thead>';
+
+              console.log(msg.result);
+              for (var i = 0; i < tableHeaders.length; i++) {
+                string += "<tr>";
+                string += '<th scope="row">' + tableHeaders[i] + "</th>";
+                for (var k = 0; k < msg.result.length; k++)
+                  string += "<td>" + msg.result[k][`${dataKeys[i]}`] + "</td>";
+                string += "</tr>";
+              }
+
+              $("#boardtable").append(string);
+              $("#progressbar").progressbar("destroy");
+              $("table").show();
+            } else {
+              $("#progressbar").progressbar("destroy");
+              $("#nodata").show();
+            }
+          },
+          error: function () {
+            console.log("Error occured");
+          },
+        });
+      });
+    </script>
+  </body>
+</html>

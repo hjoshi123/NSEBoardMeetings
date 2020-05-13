@@ -7,7 +7,6 @@ import (
 	"net/http"
 	"os"
 	"regexp"
-	"runtime"
 
 	"github.com/gin-gonic/gin"
 	"github.com/gocolly/colly"
@@ -46,11 +45,10 @@ func getBoardMeetings(c *gin.Context) {
 
 	log.Print(stock.Symbol)
 	col := colly.NewCollector()
-	if runtime.GOOS == "darwin" {
-		col.UserAgent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:76.0) Gecko/20100101 Firefox/76.0"
-	} else if runtime.GOOS == "linux" {
-		col.UserAgent = "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:76.0) Gecko/20100101 Firefox/76.0"
-	}
+	col.UserAgent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:76.0) Gecko/20100101 Firefox/76.0"
+	col.UserAgent = "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:76.0) Gecko/20100101 Firefox/76.0"
+	col.UserAgent = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.138 Safari/537.36"
+	col.UserAgent = "Mozilla/5.0 (Linux x86_64; rv:76.0) Gecko/20100101 Firefox/76.0"
 
 	// Before making a request print "Visiting ..."
 	col.OnRequest(func(r *colly.Request) {

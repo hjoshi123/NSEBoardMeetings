@@ -5,7 +5,7 @@ A Simple GOLang application using HTML and data from NSE corporate board meeting
 
 ## Running Locally
 
-Make sure you have [Go](http://golang.org/doc/install) version 1.12 or newer
+Make sure you have [Go](http://golang.org/doc/install) version 1.12 or newer. Preferrably OS is **Mac OS**
 
 ```sh
 $ git clone https://github.com/hjoshi123/NSEBoardMeetings.git
@@ -20,5 +20,3 @@ $ go run main.go
 ```
 
 Your app should now be running on [localhost:5000](http://localhost:5000/).
-
-## Deployement

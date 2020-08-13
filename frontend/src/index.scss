@@ -1,0 +1,38 @@
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins";
+
+$body-bg: $gray-500;
+$card-border-radius: .25rem !default;
+$card-inner-border-radius: $card-border-radius !default;
+$card-border-width: 0 !default;
+$card-border-color: transparent !default;
+$card-cap-bg: $white !default;
+$card-shadow: 0 0 .875rem 0 rgba($dark, 0.05) !default;
+$card-title-font-weight: $font-weight-normal !default;
+$card-spacer-y: 1rem !default;
+
+$spacer: 1rem;
+$enable-shadows: true;
+$spacers: (
+  1: (
+    $spacer * 0.5,
+  ),
+  2: $spacer,
+  3: (
+    $spacer * 1.5,
+  ),
+  4: (
+    $spacer * 2,
+  ),
+  5: (
+    $spacer * 3,
+  ),
+  6: (
+    $spacer * 5,
+  ),
+);
+
+@import "~bootstrap/scss/bootstrap";
+@import "card";
+@import "tables";

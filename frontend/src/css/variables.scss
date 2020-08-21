@@ -1,0 +1,167 @@
+// Fonts
+$font-weight-light: 300 !default;
+$font-weight-normal: 400 !default;
+$font-weight-bold: 600 !default;
+$font-size-base: .875rem !default;
+$font-size-lg: .925rem !default;
+$font-size-sm: .75rem !default;
+$headings-font-weight: 400 !default;
+
+// Spacer
+$spacer: 1rem !default;
+
+$spacers: (
+  0: 0,
+  1: ($spacer * .25),
+  2: ($spacer * .5),
+  3: $spacer,
+  4: ($spacer * 1.5),
+  5: ($spacer * 3),
+  6: ($spacer * 4.5),
+  7: ($spacer * 6)
+) !default;
+
+// Grid breakpoints
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1440px
+) !default;
+
+// Grid gutter
+$grid-gutter-width: 24px;
+
+// Grid containers
+$container-max-widths: (
+  sm: 540px,
+  md: 720px,
+  lg: 960px,
+  xl: 1200px
+) !default;
+
+// Options
+$enable-validation-icons: false !default;
+
+// Transitions
+$transition-base: all .35s ease-in-out !default;
+
+// Theme colors
+$blue:    #3B7DDD !default;
+$indigo:  #6610f2 !default;
+$purple:  #6f42c1 !default;
+$pink:    #e83e8c !default;
+$red:     #dc3545 !default;
+$orange:  #fd7e14 !default;
+$yellow:  #ffc107 !default;
+$green:   #28a745 !default;
+$teal:    #20c997 !default;
+$cyan:    #17a2b8 !default;
+
+$white:    #fff !default;
+$gray-100: #f8f9fa !default;
+$gray-200: #e9ecef !default;
+$gray-300: #dee2e6 !default;
+$gray-400: #ced4da !default;
+$gray-500: #adb5bd !default;
+$gray-600: #6c757d !default;
+$gray-700: #495057 !default;
+$gray-800: #343a40 !default;
+$gray-900: #212529 !default;
+$black: #000 !default;
+
+$primary:       $blue !default;
+$secondary:     $gray-600 !default;
+$success:       $green !default;
+$info:          $cyan !default;
+$warning:       $yellow !default;
+$danger:        $red !default;
+$light:         $gray-100 !default;
+$dark:          $gray-900 !default;
+
+$theme-colors: (
+  "primary": $primary,
+  "secondary": $secondary,
+  "success": $success,
+  "info": $info,
+  "warning": $warning,
+  "danger": $danger,
+  "light": $light,
+  "dark": $dark
+) !default;
+
+// Social colors
+$social-colors: (
+  "facebook": #3b5998,
+  "twitter": #1da1f2,
+  "google": #dc4e41,
+  "youtube": #f00,
+  "vimeo": #1ab7ea,
+  "dribbble": #ea4c89,
+  "github": #181717,
+  "instagram": #e4405f,
+  "pinterest": #bd081c,
+  "flickr": #0063dc,
+  "bitbucket": #0052cc
+) !default;
+
+// Body
+$body-bg: #F7F7FC !default;
+$body-color: $gray-700 !default;
+
+// Common
+$border-width: 1px !default;
+
+// Fonts
+$line-height-base: 1.5 !default;
+$line-height-lg: 1.5 !default;
+$line-height-sm: 1.5 !default;
+
+// Headings
+$h1-font-size: $font-size-base * 2 !default;
+$h2-font-size: $font-size-base * 1.75 !default;
+$h3-font-size: $font-size-base * 1.5 !default;
+$h4-font-size: $font-size-base * 1.25 !default;
+$h5-font-size: $font-size-base !default;
+$h6-font-size: $font-size-base !default;
+$headings-color: $black !default;
+
+// Progress
+$progress-height: 1rem !default;
+$progress-height-sm: .5rem !default;
+$progress-height-lg: 1.5rem !default;
+
+// Shadows
+$box-shadow-sm:    0 0.05rem 0.2rem rgba($black, .05) !default;
+$box-shadow:       0 0.1rem 0.2rem rgba($black, .05) !default;
+$box-shadow-lg:    0 0.2rem 0.2rem rgba($black, .05) !default;
+
+// Border radius
+$border-radius-sm: .1rem !default;
+$border-radius:    .2rem !default;
+$border-radius-lg: .3rem !default;
+
+// Footer
+$footer-bg: $white !default;
+
+// Cards
+$card-border-radius: .25rem !default;
+$card-inner-border-radius: $card-border-radius !default;
+$card-border-width: 0 !default;
+$card-border-color: transparent !default;
+$card-cap-bg: $white !default;
+$card-shadow: 0 0 .875rem 0 rgba($dark, 0.05) !default;
+$card-title-font-weight: $font-weight-normal !default;
+$card-spacer-y: 1rem !default;
+
+// Main
+$main-box-shadow: inset .75rem 0px 1.5rem 0px rgba($black, 0.075);
+
+// Content
+$content-padding-desktop: 2.5rem 2.5rem 1rem !default;
+$content-padding-mobile: 1.5rem 1.5rem .75rem !default;
+
+// Font Awesome
+$fa-font-path: "~@fortawesome/fontawesome-free/webfonts";

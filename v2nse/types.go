@@ -1,5 +1,7 @@
 package v2nse
 
+import "encoding/json"
+
 // Stock is a datatype for Symbol of the stock
 type Stock struct {
 	Symbol string `json:"symbol"`
@@ -7,7 +9,7 @@ type Stock struct {
 
 // Meetings is a custom type to access all the corporate details of a stock through NSE API
 type Meetings struct {
-	BMeetings Corporate `json:"corporate"`
+	Corp Corporate `json:"corporate"`
 }
 
 // Corporate is an embedding for the json strucutre
@@ -38,17 +40,18 @@ type Metadata struct {
 
 // PriceInfo gives Price Details
 type PriceInfo struct {
-	HighLow Week52 `json:"weekHighLow"`
+	WeekHighLow Week52 `json:"weekHighLow"`
 }
 
 // Week52 tells the 52 week high/low prices
 type Week52 struct {
-	Min string `json:"min"`
-	Max string `json:"max"`
+	Min json.Number `json:"min"`
+	Max json.Number `json:"max"`
 }
 
 // FinancialResult gives the required detail of each financial result in the json object
 type FinancialResult struct {
+	Income          string `json:"income"`
 	ProfitBeforeTax string `json:"reProLossBefTax"`
 	ProfitAfterTax  string `json:"proLossAftTax"`
 }

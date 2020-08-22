@@ -35,7 +35,7 @@ func GetBoardMeetingsListV2(stock string) Meetings {
 }
 
 // GetStockDataV2 gets the board meetings list from the NSE Website using API calls
-func GetStockDataV2(stock string) {
+func GetStockDataV2(stock string) map[string]string {
 	client := &http.Client{}
 	req, err := http.NewRequest("GET", fmt.Sprintf("https://www.nseindia.com/api/quote-equity?symbol=%s", stock), nil)
 	req.Header.Set("Content-Type", "application/json; charset=utf-8")
@@ -55,5 +55,14 @@ func GetStockDataV2(stock string) {
 	finalResult := make(map[string]string)
 
 	finalResult["industry"] = basicInfo.Meta.Industry
-	finalResult["high"] = basicInfo.Price.HighLow.Max + "/" + basicInfo.Price.HighLow.Min
+	fmt.Println(basicInfo)
+	finalResult["high"] = string(basicInfo.Price.WeekHighLow.Max) + "/" + string(basicInfo.Price.WeekHighLow.Min)
+
+	corporate := GetBoardMeetingsListV2(stock)
+
+	finalResult["income"] = corporate.Corp.FinancialResults[0].Income
+	finalResult["profit"] = corporate.Corp.FinancialResults[0].ProfitBeforeTax
+	finalResult["netprofit"] = corporate.Corp.FinancialResults[0].ProfitAfterTax
+
+	return finalResult
 }

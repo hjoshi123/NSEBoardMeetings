@@ -44,7 +44,7 @@ const App = () => {
           setMeetingsProgress(false);
         });
 
-      fetch(`http://localhost:5000/api/v1/stockDetails?symbol=${stock}`, {
+      fetch(`http://localhost:5000/api/v2/stockDetails?symbol=${stock}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',

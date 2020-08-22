@@ -19,8 +19,9 @@ const StockData = (props) => {
         <div className="col-sm-6">
           <div className="card">
             <div className="card-body">
-              <h5 className="card-title mb-4">Total Expenditure</h5>
-              <h1 className="display-5 mt-1 mb-3 text-wrap">₹{stockData.expenditure}</h1>
+              {/* Total Expenditure if v1 and Total Income if v2 change expenditure to income */ }
+              <h5 className="card-title mb-4">Total Income</h5>
+              <h1 className="display-5 mt-1 mb-3 text-wrap">₹{stockData.income}</h1>
               <div className="mb-1">
                 <span className="text-danger">
                   {' '}

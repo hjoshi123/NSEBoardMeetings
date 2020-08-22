@@ -122,4 +122,11 @@ func getStockDetailsV1(c *gin.Context) {
 }
 
 func getStockDetailsV2(c *gin.Context) {
+	stock := c.Query("symbol")
+
+	stockDetails := v2nse.GetStockDataV2(stock)
+
+	c.JSON(http.StatusOK, gin.H{
+		"result": stockDetails,
+	})
 }

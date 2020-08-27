@@ -18,6 +18,11 @@ type Corporate struct {
 	FinancialResults []FinancialResult `json:"financialResults"`
 }
 
+// TradeInfo is a wrapper for TradeDetails
+type TradeInfo struct {
+	TradeDetails TradeDetailsWrapper `json:"marketDeptOrderBook"`
+}
+
 // BasicInfo gives the basic details of the stock symbol
 type BasicInfo struct {
 	Meta  Metadata  `json:"metadata"`
@@ -54,4 +59,16 @@ type FinancialResult struct {
 	Income          string `json:"income"`
 	ProfitBeforeTax string `json:"reProLossBefTax"`
 	ProfitAfterTax  string `json:"proLossAftTax"`
+}
+
+// TradeDetailsWrapper wrapper for TradeDetails struct
+type TradeDetailsWrapper struct {
+	TradeDetail TradeDetails `json:"tradeInfo"`
+}
+
+// TradeDetails gives the traded details information
+type TradeDetails struct {
+	TotalTradedVolume json.Number `json:"totalTradedVolume"`
+	TotalTradedValue  json.Number `json:"totalTradedValue"`
+	TotalMarketCap    json.Number `json:"totalMarketCap"`
 }

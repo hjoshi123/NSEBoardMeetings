@@ -38,8 +38,8 @@ const App = () => {
           //     purpose: resp.purpose[i],
           //   });
           // }
-          if (result.corporate.boardMeetings.length >= 11)
-            setMeetingList(result.corporate.boardMeetings.slice(0, 10));
+          if (result.corporate.boardMeetings.length >= 6)
+            setMeetingList(result.corporate.boardMeetings.slice(0, 5));
           else setMeetingList(result.corporate.boardMeetings);
           setMeetingsProgress(false);
         });
@@ -71,7 +71,7 @@ const App = () => {
   };
 
   return (
-    <Container className="mt-6">
+    <Container fluid className="content mt-6">
       <div className="row mb-2 mb-xl-3">
         <div className="col-auto d-none d-sm-block">
           <h3>
@@ -88,12 +88,12 @@ const App = () => {
           </>
         ) : (
           <>
-            <div className="col-12 col-md-6 d-flex order-1 order-md-1">
+            <div className="col-12 col-md-5 d-flex order-1 order-md-1">
               <Search setStockName={useTableData} />
             </div>
           </>
         )}
-        <div className="col-12 col-md-6 d-flex order-2 order-md-3">
+        <div className="col-12 col-md-7 d-flex order-2 order-md-3">
           {isStockDataProgress ? (
             <>{spinnerVisible ? <MeetingsProgress /> : null}</>
           ) : (
@@ -104,7 +104,7 @@ const App = () => {
       {isMeetingsProgress ? (
         <>{spinnerVisible ? <MeetingsProgress /> : null}</>
       ) : (
-        <Table meetings={meetingList} />
+        <Table meetings={meetingList} stock={stock} />
       )}
     </Container>
   );

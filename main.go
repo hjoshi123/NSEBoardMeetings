@@ -46,6 +46,7 @@ func main() {
 	{
 		v2.GET("/boardMeetingsList", getBoardMeetingsListV2)
 		v2.GET("/stockDetails", getStockDetailsV2)
+		v2.GET("/tradeDetails", getTradeDetailsV2)
 	}
 
 	router.Run(":" + port)
@@ -104,16 +105,16 @@ func getStockDetailsV1(c *gin.Context) {
 	} else {
 		finalResult["industry"] = strings.ToLower(result[0])
 		finalResult["high"] = result[1]
-		finalResult["expenditure"] = result[2]
+		finalResult["income"] = result[1]
 		finalResult["profit"] = result[3]
 		finalResult["netprofit"] = result[4]
 		j = 4
 	}
 
 	if j <= 1 {
-		finalResult["expenditure"] = result[j]
-		finalResult["profit"] = result[j+1]
-		finalResult["netprofit"] = result[j+2]
+		finalResult["income"] = result[j]
+		finalResult["profit"] = result[j+2]
+		finalResult["netprofit"] = result[j+3]
 	}
 
 	c.JSON(http.StatusOK, gin.H{
@@ -128,5 +129,15 @@ func getStockDetailsV2(c *gin.Context) {
 
 	c.JSON(http.StatusOK, gin.H{
 		"result": stockDetails,
+	})
+}
+
+func getTradeDetailsV2(c *gin.Context) {
+	stock := c.Query("symbol")
+
+	tradeDetails := v2nse.GetTradeInfoV2(stock)
+
+	c.JSON(http.StatusOK, gin.H{
+		"result": tradeDetails,
 	})
 }

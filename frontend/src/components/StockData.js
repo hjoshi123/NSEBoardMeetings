@@ -19,9 +19,13 @@ const StockData = (props) => {
         <div className="col-sm-6">
           <div className="card">
             <div className="card-body">
-              {/* Total Expenditure if v1 and Total Income if v2 change expenditure to income */ }
-              <h5 className="card-title mb-4">Total Income</h5>
-              <h1 className="display-5 mt-1 mb-3 text-wrap">₹{stockData.income}</h1>
+              {/* Total Expenditure if v1 and Total Income if v2 change expenditure to income */}
+              <h5 className="card-title mb-4">
+                <strong>Total Income</strong>
+              </h5>
+              <h1 className="display-5 mt-1 mb-3 text-wrap">
+                ₹{stockData.income}
+              </h1>
               <div className="mb-1">
                 <span className="text-danger">
                   {' '}
@@ -33,8 +37,12 @@ const StockData = (props) => {
           </div>
           <div className="card">
             <div className="card-body">
-              <h5 className="card-title mb-4">52W High/Low</h5>
-              <h1 className="display-5 mt-1 mb-3 text-wrap">{stockData.high}</h1>
+              <h5 className="card-title mb-4">
+                <strong>52W High/Low</strong>
+              </h5>
+              <h1 className="display-5 mt-1 mb-3 text-wrap">
+                ₹ {stockData.high}
+              </h1>
               <div className="mb-1">
                 <span className="text-success">
                   {' '}
@@ -48,8 +56,12 @@ const StockData = (props) => {
         <div className="col-sm-6">
           <div className="card">
             <div className="card-body">
-              <h5 className="card-title mb-4">Profit</h5>
-              <h1 className="display-5 mt-1 mb-3 text-wrap">₹{stockData.profit}</h1>
+              <h5 className="card-title mb-4">
+                <strong>Profit</strong>
+              </h5>
+              <h1 className="display-5 mt-1 mb-3 text-wrap">
+                ₹ {stockData.profit}
+              </h1>
               <div className="mb-1">
                 {isNegativeProfit ? (
                   <>
@@ -65,8 +77,8 @@ const StockData = (props) => {
                     {' '}
                     <span className="text-success">
                       {' '}
-                      <i className="mdi mdi-arrow-bottom-right"></i>{' '}
-                      ₹{stockData.netprofit}{' '}
+                      <i className="mdi mdi-arrow-bottom-right"></i> ₹
+                      {stockData.netprofit}{' '}
                     </span>{' '}
                   </>
                 )}
@@ -77,8 +89,12 @@ const StockData = (props) => {
           </div>
           <div className="card">
             <div className="card-body">
-              <h5 className="card-title mb-4">Industry</h5>
-              <h1 className="display-5 mt-1 mb-3 text-wrap">{stockData.industry}</h1>
+              <h5 className="card-title mb-4">
+                <strong>Industry</strong>
+              </h5>
+              <h1 className="display-5 mt-1 mb-3 text-wrap">
+                {stockData.industry}
+              </h1>
               <div className="mb-1">
                 <span className="text-danger">
                   {' '}

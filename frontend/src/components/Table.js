@@ -21,11 +21,25 @@ const columns = [
 
 const Table = (props) => {
   const [products, setProducts] = useState([]);
+  const [tradeInfo, setTradeInfo] = useState({});
 
   useEffect(() => {
     props.meetings.map((elem, index) => (elem['index'] = index));
     setProducts(props.meetings);
   }, [props.meetings]);
+
+  useEffect(() => {
+    fetch(`http://localhost:5000/api/v2/tradeDetails?symbol=${props.stock}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((res) => res.json())
+      .then(({ result }) => {
+        setTradeInfo(result);
+      });
+  }, [props.stock]);
 
   const expandRow = {
     renderer: (row, rowIndex) => (
@@ -50,7 +64,7 @@ const Table = (props) => {
 
   return (
     <div className="row">
-      <div className="col-12 col-md-12 d-flex">
+      <div className="col-12 col-md-6 col-xl-7 d-flex order-1 order-xl-1">
         <div className="card flex-fill">
           <ToolkitProvider
             bootstrap4
@@ -68,11 +82,41 @@ const Table = (props) => {
                   hover
                   className="table table-responsive-md table-hover my-0"
                   expandRow={expandRow}
+                  bordered={false}
                   {...props.baseProps}
-                />{' '}
+                />
               </div>
             )}
           </ToolkitProvider>
+        </div>
+      </div>
+      <div className="col-12 col-md-6 col-xl-5 d-flex order-2 order-xl-5">
+        <div className="card flex-fill w-100">
+          <div className="card-header">
+            <h5 className="card-title mb-0">
+              <strong>Trade Information</strong>
+            </h5>
+          </div>
+          <div className="card-body d-flex">
+            <div className="align-self-center w-100">
+              <table className="table mb-0">
+                <tbody>
+                  <tr>
+                    <td>Total Traded Volume (₹ Lakhs)</td>
+                    <td className="text-right">{tradeInfo.volume}</td>
+                  </tr>
+                  <tr>
+                    <td>Total Market Cap (₹ Lakhs)</td>
+                    <td className="text-right">{tradeInfo.marketCap}</td>
+                  </tr>
+                  <tr>
+                    <td>Traded Value (₹ Lakhs)</td>
+                    <td className="text-right">{tradeInfo.value}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -85,7 +129,7 @@ const MyExportCSV = (props) => {
   };
 
   return (
-    <div className="d-flex justify-content-end">
+    <div className="d-flex justify-content-end mt-2 mb-2">
       <button className="btn btn-success" onClick={handleClick}>
         Export to CSV
       </button>

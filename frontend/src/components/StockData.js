@@ -19,7 +19,6 @@ const StockData = (props) => {
         <div className="col-sm-6">
           <div className="card">
             <div className="card-body">
-              {/* Total Expenditure if v1 and Total Income if v2 change expenditure to income */}
               <h5 className="card-title mb-4">
                 <strong>Total Income</strong>
               </h5>

@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { AsyncTypeahead, Highlighter } from 'react-bootstrap-typeahead';
 import 'react-bootstrap-typeahead/css/Typeahead.css';
+import { Fragment } from 'react';
 
-const SEARCH_URL = '/corporates/common/getCompanyList.jsp?query';
+const SEARCH_URL = '/api/search/autocomplete?q';
 
 const Search = ({ setStockName }) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -12,7 +13,7 @@ const Search = ({ setStockName }) => {
     if (stockSelected[0] === undefined) {
       setStockName('');
     } else {
-      setStockName(stockSelected[0].CompanyValues.split(' ')[0]);
+      setStockName(stockSelected[0].Symbol);
     }
   };
 
@@ -21,9 +22,10 @@ const Search = ({ setStockName }) => {
 
     fetch(`${SEARCH_URL}=${query}`)
       .then((resp) => resp.json())
-      .then(({ rows1 }) => {
-        const stock = rows1.map((item) => ({
-          CompanyValues: item.CompanyValues,
+      .then(({ symbols }) => {
+        const stock = symbols.map((item) => ({
+          Symbol: item.symbol,
+          SymbolInfo: item['symbol_info'],
         }));
 
         setStock(stock);
@@ -43,16 +45,20 @@ const Search = ({ setStockName }) => {
           <AsyncTypeahead
             id="async-typeahead"
             isLoading={isLoading}
-            labelKey="CompanyValues"
+            labelKey="Symbol"
             minLength={3}
             onSearch={handleSearch}
             options={stock}
             onChange={getStock}
             placeholder="Search for a stock"
             renderMenuItemChildren={(option, props) => (
-              <Highlighter search={props.text}>
-                {option[props.labelKey]}
-              </Highlighter>
+              <Fragment>
+                <Highlighter search={props.text}>
+                  {option[props.labelKey]}
+                </Highlighter>
+                {' '}
+                <span>{option.SymbolInfo}</span>
+              </Fragment>
             )}
           />
         </div>

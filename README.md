@@ -1,7 +1,14 @@
 
 # NSE Board Meetings
 
-A Simple GOLang application using HTML and data from NSE corporate board meeting.
+A Simple GOLang application using ReactJS and data from NSE corporate board meeting.
+
+## Structure
+
+* `frontend`: ReactJS App to display data (currently uses v2 api).
+* `v1nse`: Legacy NSE website (www1) due for End of Life in August 2020. Used `go-colly` for scraping data of the website.
+* `v2nse`: Used JSON APIs from nse website to display meaningful data. (Selective JSON data is received rather than entire JSON).
+* `main.go`: Uses `gin` router to map v1 and v2 apis accurately for the required purposes.
 
 ## Running Locally
 

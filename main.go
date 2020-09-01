@@ -67,7 +67,13 @@ func getBoardMeetingsListV1(c *gin.Context) {
 func getBoardMeetingsListV2(c *gin.Context) {
 	stock := c.Query("symbol")
 
-	corporate := v2nse.GetBoardMeetingsListV2(stock)
+	corporate, err := v2nse.GetBoardMeetingsListV2(stock)
+
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{
+			"result": "Something happened. Please try again",
+		})
+	}
 
 	c.JSON(http.StatusOK, gin.H{
 		"result": corporate,
@@ -125,7 +131,13 @@ func getStockDetailsV1(c *gin.Context) {
 func getStockDetailsV2(c *gin.Context) {
 	stock := c.Query("symbol")
 
-	stockDetails := v2nse.GetStockDataV2(stock)
+	stockDetails, err := v2nse.GetStockDataV2(stock)
+
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{
+			"result": "Something happened. Please try again",
+		})
+	}
 
 	c.JSON(http.StatusOK, gin.H{
 		"result": stockDetails,
@@ -135,7 +147,13 @@ func getStockDetailsV2(c *gin.Context) {
 func getTradeDetailsV2(c *gin.Context) {
 	stock := c.Query("symbol")
 
-	tradeDetails := v2nse.GetTradeInfoV2(stock)
+	tradeDetails, err := v2nse.GetTradeInfoV2(stock)
+
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{
+			"result": "Something happened. Please try again",
+		})
+	}
 
 	c.JSON(http.StatusOK, gin.H{
 		"result": tradeDetails,

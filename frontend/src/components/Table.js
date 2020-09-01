@@ -129,7 +129,7 @@ const MyExportCSV = (props) => {
   };
 
   return (
-    <div className="d-flex justify-content-end mt-2 mb-2">
+    <div className="d-flex justify-content-end mt-2 mb-2 mx-2">
       <button className="btn btn-success" onClick={handleClick}>
         Export to CSV
       </button>

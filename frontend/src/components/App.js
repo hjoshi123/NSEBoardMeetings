@@ -27,7 +27,12 @@ const App = () => {
           'Content-Type': 'application/json',
         },
       })
-        .then((res) => res.json())
+        .then((res) => {
+          if (!res.ok) {
+            setMeetingsProgress(false);
+          }
+          return res.json();
+        })
         .then(({ result }) => {
           console.log(result);
 
@@ -42,6 +47,10 @@ const App = () => {
             setMeetingList(result.corporate.boardMeetings.slice(0, 5));
           else setMeetingList(result.corporate.boardMeetings);
           setMeetingsProgress(false);
+        })
+        .catch((err) => {
+          console.log(err);
+          setMeetingsProgress(false);
         });
 
       fetch(`http://localhost:5000/api/v2/stockDetails?symbol=${stock}`, {
@@ -50,13 +59,22 @@ const App = () => {
           'Content-Type': 'application/json',
         },
       })
-        .then((res) => res.json())
+        .then((res) => {
+          if (!res.ok) {
+            setStockDataProgress(false);
+          }
+          return res.json();
+        })
         .then(({ result }) => {
           console.log(result);
 
           setStockData(result);
           setStockDataProgress(false);
           setSpinnerVisible(false);
+        })
+        .catch((err) => {
+          setSpinnerVisible(false);
+          setStockDataProgress(false);
         });
     } else {
       setSpinnerVisible(false);

@@ -6,14 +6,35 @@ import Table from './Table';
 import StockData from './StockData';
 import { useState, useEffect } from 'react';
 
+/**
+ * @component App
+ * Main Component responsible for rendering all other components
+ * 
+ * @state stock
+ * gets the stock from the child component and is passed to App using a callback.
+ */
+
 const App = () => {
   const [stock, setStock] = useState('');
   const [meetingList, setMeetingList] = useState([]);
-  const [isMeetingsProgress, setMeetingsProgress] = useState(true);
-
   const [stockData, setStockData] = useState({});
-  const [isStockDataProgress, setStockDataProgress] = useState(true);
 
+  /**
+   * @state isMeetingsProgress
+   * true by default indicating meeting is in progress. false when an error occurs or the meetingList is fetched from API.
+   */
+  const [isMeetingsProgress, setMeetingsProgress] = useState(true);
+  /**
+   * @state isStockDataProgress
+   * true by default indicating stock data is being fetched. false when either error occurs or data is fetched.
+   * Spinner is only shown if both isStockDataProgress and spinnerVisible is true.
+   */
+  const [isStockDataProgress, setStockDataProgress] = useState(true);
+  /**
+   * @state spinnerVisible
+   * true when the stock search symbol is entered otherwise its false. 
+   * This is used in conjunction with isMeetingProgress or isStockDataProgress to display the spinner.
+   */
   const [spinnerVisible, setSpinnerVisible] = useState(
     stock === '' ? false : true,
   );
@@ -73,6 +94,7 @@ const App = () => {
           setSpinnerVisible(false);
         })
         .catch((err) => {
+          console.log(err);
           setSpinnerVisible(false);
           setStockDataProgress(false);
         });

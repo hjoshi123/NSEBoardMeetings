@@ -16,5 +16,5 @@ func TestContentGetStockResultDetailsV1Fail(t *testing.T) {
 	expected := []string{"1542500.00", "2032500.00", "490000.00", "400800.00"}
 
 	got := GetStockResultDetailsV1("INFY")
-	assert.Equal(t, expected, got, "Values of Contents are mismatched shouldnt return the same")
+	assert.NotEqual(t, expected, got, "Values of Contents are mismatched shouldnt return the same")
 }

@@ -1,38 +1,44 @@
-SHELL := /bin/sh
+GOCMD=go
+GOBUILD=$(GOCMD) build
+GOCLEAN=$(GOCMD) clean
+GOTEST=$(GOCMD) test ./...
 
-TARGET := $(shell echo "bin/NSEBoardMeetings")
-.DEFAULT_GOAL: $(TARGET)
+OS := $(shell uname -s | awk '{print tolower($$0)}')
 
-PORT := 5000
-export PORT
+TAG = $$(git rev-parse --short HEAD)
 
-VERSION := 0.0.1
-BUILD := `git rev-parse HEAD`
+BINARY = main
 
-SRC = $(shell find . -type f -name '*.go' -not -path "./bin/*")
+GOARCH = amd64
 
-# making sure no name collision
-.PHONY: all clean build uninstall fmt simplify run
+LDFLAGS = -ldflags
 
-all: uninstall build
+.PHONY: run
+run: bin #this will cause "bin" target to be build first
+	./$(BINARY) # Execute the binary
 
-$(TARGET): $(SRC)
-	@go build -o $(TARGET)
+.PHONY: bin
+bin:
+	CGO_ENABLED=0 GOOS=$(OS) GOARCH=${GOARCH} go build ${LDFLAGS} "-w" -a -o ${BINARY} . ;
 
+# Runs unit tests.
+.PHONY: test
+test:
+	$(GOTEST)
+
+# Generates a coverage report
+.PHONY: cover
+cover:
+	${GOCMD} test -coverprofile=coverage.out ./... && ${GOCMD} tool cover -html=coverage.out
+
+# Remove coverage report and the binary.
+.SILENT: clean
+.PHONY: clean
 clean:
-	@rm -f $(TARGET)
+	$(GOCLEAN)
+	@rm -f ${BINARY}
+	@rm -f coverage.out
 
-build:
-	@go build -o $(TARGET)
-
-uninstall: clean
-	@rm -f $$(which ${TARGET})
-
-format:
-	@gofmt -w $(SRC)
-
-simplify:
-	@gofmt -s -w $(SRC)
-
-run: build
-	@$(TARGET)%
+.PHONY: deps
+deps:
+	$(GOCMD) mod download
